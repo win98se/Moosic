@@ -25,6 +25,11 @@ public class MessageHandler extends ListenerAdapter {
                     .setThumbnail(String.format("https://img.youtube.com/vi/%s/hqdefault.jpg", PlayingTrack.getInfo().identifier))
                     .build()
             ).queue();
+        } else if (e.getMessage().getContentRaw().toLowerCase().startsWith(Config.command_prefix.toLowerCase() + "ping")) {
+            long time = System.currentTimeMillis();
+            e.getChannel().sendMessage("Pong!").queue(response -> {
+                    response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue();
+            });
         }
     }
 
